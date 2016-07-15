@@ -1,16 +1,16 @@
 /**
- * Test case for sugoInterfaceSerialport.
+ * Test case for sugoModuleSerialport.
  * Runs with mocha.
  */
 'use strict'
 
-const sugoInterfaceSerialport = require('../lib/sugo_interface_serialport.js')
+const sugoModuleSerialport = require('../lib/sugo_module_serialport.js')
 const assert = require('assert')
 const sgSchemas = require('sg-schemas')
 const sgValidator = require('sg-validator')
 const co = require('co')
 
-describe('sugo-interface-serialport', () => {
+describe('sugo-module-serialport', () => {
   before(() => co(function * () {
 
   }))
@@ -19,26 +19,26 @@ describe('sugo-interface-serialport', () => {
 
   }))
 
-  it('Get interface spec', () => co(function * () {
-    let interface_ = sugoInterfaceSerialport({})
-    assert.ok(interface_)
+  it('Get module spec', () => co(function * () {
+    let module_ = sugoModuleSerialport({})
+    assert.ok(module_)
 
-    let { $spec } = interface_
-    let specError = sgValidator(sgSchemas.interfaceSpec).validate($spec)
+    let { $spec } = module_
+    let specError = sgValidator(sgSchemas.moduleSpec).validate($spec)
     assert.ok(!specError)
   }))
 
   it('Try ping-pong', () => co(function * () {
-    let interface_ = sugoInterfaceSerialport({})
-    let pong = yield interface_.ping({ params: [ 'pong' ] })
+    let module_ = sugoModuleSerialport({})
+    let pong = yield module_.ping({ params: [ 'pong' ] })
     assert.equal(pong, 'pong')
   }))
 
   it('Do assert', () => co(function * () {
-    let interface_ = sugoInterfaceSerialport({})
+    let module_ = sugoModuleSerialport({})
     let caught
     try {
-      yield interface_.assert({})
+      yield module_.assert({})
     } catch (err) {
       caught = err
     }
@@ -46,9 +46,9 @@ describe('sugo-interface-serialport', () => {
   }))
 
   it('Compare methods with spec', () => co(function * () {
-    let interface_ = sugoInterfaceSerialport({})
-    let { $spec } = interface_
-    let implemented = Object.keys(interface_).filter((name) => !/^[\$_]/.test(name))
+    let module_ = sugoModuleSerialport({})
+    let { $spec } = module_
+    let implemented = Object.keys(module_).filter((name) => !/^[\$_]/.test(name))
     let described = Object.keys($spec.methods).filter((name) => !/^[\$_]/.test(name))
     for (let name of implemented) {
       assert.ok(!!~described.indexOf(name), `${name} method should be described in spec`)

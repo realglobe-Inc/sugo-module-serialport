@@ -8,6 +8,6 @@
 
 process.chdir(`${__dirname}/..`)
 
-const { update } = require('sugo-ci-interface')
+const { update } = require('sugo-ci-module')
 
 update({})

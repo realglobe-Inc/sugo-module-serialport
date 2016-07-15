@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
 /**
- * Example usage of the terminal
+ * Example usage of the caller
  */
 'use strict'
 
-const sugoInterfaceSerialport = require('sugo-interface-serialport')
-const sugoSpot = require('sugo-spot')
+const sugoModuleSerialport = require('sugo-module-serialport')
+const sugoActor = require('sugo-actor')
 const co = require('co')
 
 co(function * () {
-  let spot = sugoSpot('http://my-sugo-cloud.example.com/spots', {
-    key: 'my-spot-01',
-    interfaces: {
-      // Register the interface
-      myInterface01: sugoInterfaceSerialport({})
+  let actor = sugoActor('http://my-sugo-cloud.example.com/actors', {
+    key: 'my-actor-01',
+    modules: {
+      // Register the module
+      myModule01: sugoModuleSerialport({})
     }
   })
-  yield spot.connect()
+  yield actor.connect()
 }).catch((err) => console.error(err))

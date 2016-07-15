@@ -1,7 +1,7 @@
 Methods
 ---------
 
-The following methods are available from remote terminals for the interface.
+The following methods are available from remote callers for the module.
 
 {{#each vars.spec.methods}}
 + [.{{{@key}}}({{#each params}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if return}} -> {{{return.type}}}{{/if}}](#method-{{spinalcase @key}})

@@ -8,7 +8,7 @@
 
 process.chdir(`${__dirname}/..`)
 
-const { release } = require('sugo-ci-interface')
+const { release } = require('sugo-ci-module')
 
 release({
   beforeRelease: [

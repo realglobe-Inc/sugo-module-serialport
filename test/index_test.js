@@ -18,8 +18,8 @@ describe('index', () => {
   }))
 
   it('Create instance from index', () => co(function * () {
-    let interface_ = index({})
-    assert.ok(interface_)
+    let module_ = index({})
+    assert.ok(module_)
   }))
 })
 
