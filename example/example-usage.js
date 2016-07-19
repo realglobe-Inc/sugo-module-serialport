@@ -11,10 +11,10 @@ const co = require('co')
 
 co(function * () {
   let actor = sugoActor('http://my-sugo-cloud.example.com/actors', {
-    key: 'my-actor-01',
+    key: 'my-serial-port-01',
     modules: {
       // Register the module
-      myModule01: sugoModuleSerialport({})
+      serialport: sugoModuleSerialport({})
     }
   })
   yield actor.connect()

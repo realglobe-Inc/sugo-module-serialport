@@ -1,3 +1,4 @@
 {
-  "SUGOS": "https://github.com/realglobe-Inc/sugos"
+  "SUGOS": "https://github.com/realglobe-Inc/sugos",
+  "serialport": "https://www.npmjs.com/package/serialport"
 }
