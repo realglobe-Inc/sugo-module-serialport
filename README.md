@@ -53,6 +53,7 @@ SUGOS module to access serial ports
 <!-- Section from "doc/guides/00.Requirements.md.hbs" Start -->
 
 <a name="section-doc-guides-00-requirements-md"></a>
+
 Requirements
 -----
 
@@ -81,6 +82,7 @@ Requirements
 <!-- Section from "doc/guides/01.Installation.md.hbs" Start -->
 
 <a name="section-doc-guides-01-installation-md"></a>
+
 Installation
 -----
 
@@ -94,6 +96,7 @@ $ npm install sugo-module-serialport --save
 <!-- Section from "doc/guides/02.Usage.md.hbs" Start -->
 
 <a name="section-doc-guides-02-usage-md"></a>
+
 Usage
 ---------
 
@@ -127,28 +130,6 @@ co(function * () {
 Then, call the module from remote caller.
 
 ```javascript
-#!/usr/bin/env node
-
-/**
- * Example control from remote caller
- */
-'use strict'
-
-const co = require('co')
-const assert = require('assert')
-const sugoCaller = require('sugo-caller')
-
-co(function * () {
-  let caller = sugoCaller('http://my-sugo-cloud.example.com/callers', {})
-  let actor = caller.connect('my-actor-01')
-
-  // Access to the module
-  let myModule01 = actor.myModule01()
-
-  // Send ping
-  let pong = yield myModule01.ping()
-  assert.ok(pong)
-}).catch((err) => console.error(err))
 
 ```
 
@@ -157,6 +138,7 @@ co(function * () {
 <!-- Section from "doc/guides/03.Methods.md.hbs" Start -->
 
 <a name="section-doc-guides-03-methods-md"></a>
+
 Methods
 ---------
 
@@ -164,6 +146,18 @@ The following methods are available from remote callers for the module.
 
 + [.ping(pong) -> string](#method-ping)
 + [.assert() -> boolean](#method-assert)
++ [.list() -> array](#method-list)
++ [.SerialPort(path, options)](#method-serial-port)
++ [.close()](#method-close)
++ [.drain()](#method-drain)
++ [.flush()](#method-flush)
++ [.isOpen()](#method-is-open)
++ [.open()](#method-open)
++ [.pause()](#method-pause)
++ [.resume()](#method-resume)
++ [.set()](#method-set)
++ [.update()](#method-update)
++ [.write(data)](#method-write)
 
 <a name="method-ping"></a>
 ### .ping(pong) -> <code>string</code>
@@ -178,6 +172,75 @@ Test the reachability of an module.
 ### .assert() -> <code>boolean</code>
 
 Test if the actor fulfills system requirements
+
+<a name="method-list"></a>
+### .list() -> <code>array</code>
+
+Retrieves a list of available serial ports with metadata.
+
+<a name="method-serial-port"></a>
+### .SerialPort(path, options)
+
+Create a new serial port object
+
+| Param | Type | Description |
+| ----- | ---- | ----------- |
+| path  | <code>string</code> | path |
+| options  | <code>object</code> | options |
+
+<a name="method-close"></a>
+### .close()
+
+Close the given serial port.
+
+<a name="method-drain"></a>
+### .drain()
+
+Waits until all output data has been transmitted to the serial port.
+
+<a name="method-flush"></a>
+### .flush()
+
+Flushes data received but not read.
+
+<a name="method-is-open"></a>
+### .isOpen()
+
+Returns true if the port is open.
+
+<a name="method-open"></a>
+### .open()
+
+Open a serial port.
+
+<a name="method-pause"></a>
+### .pause()
+
+Pauses an open connection.
+
+<a name="method-resume"></a>
+### .resume()
+
+Resumes a paused connection.
+
+<a name="method-set"></a>
+### .set()
+
+Sets flags on an open port.
+
+<a name="method-update"></a>
+### .update()
+
+Changes the baudrate for an open port.
+
+<a name="method-write"></a>
+### .write(data)
+
+Write data to the given serial port.
+
+| Param | Type | Description |
+| ----- | ---- | ----------- |
+| data  | <code>object</code> | Buffer data to write |
 
 
 

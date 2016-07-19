@@ -30,7 +30,7 @@ describe('sugo-module-serialport', () => {
 
   it('Try ping-pong', () => co(function * () {
     let module_ = sugoModuleSerialport({})
-    let pong = yield module_.ping({ params: [ 'pong' ] })
+    let pong = yield module_.ping('pong')
     assert.equal(pong, 'pong')
   }))
 
