@@ -285,6 +285,28 @@ Write data to the given serial port.
 
 <!-- Section from "doc/guides/03.Methods.md.hbs" End -->
 
+<!-- Section from "doc/guides/04.Events.md.hbs" Start -->
+
+<a name="section-doc-guides-04-events-md"></a>
+
+Events
+---------
+
+The following events my be emitted from the module.
+
+<a name="events"></a>
+
+| Param | Description |
+| ----- | ----------- |
+| "open"  | Callback is called with no arguments when the port is opened and ready for writing. |
+| "close"  | Callback is called with no arguments when the port is closed. |
+| "disconnect"  | Callback is called with an error object. This will always happen before a close event if a disconnection is detected. |
+| "data"  | Callback is called with data depending on your chosen parser. |
+| "error"  | Callback is called with an error object whenever there is an error. |
+
+
+<!-- Section from "doc/guides/04.Events.md.hbs" End -->
+
 
 <!-- Sections Start -->
 
