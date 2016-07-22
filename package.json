@@ -1,6 +1,6 @@
 {
   "name": "sugo-module-serialport",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SUGOS module to access serial ports",
   "main": "lib",
   "scripts": {
