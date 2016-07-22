@@ -35,7 +35,7 @@
     "sg-schemas": "^2.0.5",
     "sg-validator": "^1.0.1",
     "sugo-ci-module": "^2.0.1",
-    "sugos-assets": "^1.1.9"
+    "sugos-assets": "^2.0.1"
   },
   "engines": {
     "node": ">=6",
