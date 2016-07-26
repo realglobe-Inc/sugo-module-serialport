@@ -1,10 +1,10 @@
 /**
- * Test case for sugoModuleSerialport.
+ * Test case for Serialport.
  * Runs with mocha.
  */
 'use strict'
 
-const sugoModuleSerialport = require('../lib/sugo_module_serialport.js')
+const Serialport = require('../lib/serialport.js')
 const assert = require('assert')
 const sgSchemas = require('sg-schemas')
 const sgValidator = require('sg-validator')
@@ -20,25 +20,25 @@ describe('sugo-module-serialport', () => {
   }))
 
   it('Get module spec', () => co(function * () {
-    let module_ = sugoModuleSerialport({})
-    assert.ok(module_)
+    let module = new Serialport({})
+    assert.ok(module)
 
-    let { $spec } = module_
+    let { $spec } = module
     let specError = sgValidator(sgSchemas.moduleSpec).validate($spec)
     assert.ok(!specError)
   }))
 
   it('Try ping-pong', () => co(function * () {
-    let module_ = sugoModuleSerialport({})
-    let pong = yield module_.ping('pong')
+    let module = new Serialport({})
+    let pong = yield module.ping('pong')
     assert.equal(pong, 'pong')
   }))
 
   it('Do assert', () => co(function * () {
-    let module_ = sugoModuleSerialport({})
+    let module = new Serialport({})
     let caught
     try {
-      yield module_.assert({})
+      yield module.assert({})
     } catch (err) {
       caught = err
     }
@@ -46,9 +46,11 @@ describe('sugo-module-serialport', () => {
   }))
 
   it('Compare methods with spec', () => co(function * () {
-    let module_ = sugoModuleSerialport({})
-    let { $spec } = module_
-    let implemented = Object.keys(module_).filter((name) => !/^[\$_]/.test(name))
+    let module = new Serialport({})
+    let { $spec } = module
+    let implemented = Object.getOwnPropertyNames(Serialport.prototype)
+      .filter((name) => !/^[\$_]/.test(name))
+      .filter((name) => !~[ 'constructor', 'driver' ].indexOf(name))
     let described = Object.keys($spec.methods).filter((name) => !/^[\$_]/.test(name))
     for (let name of implemented) {
       assert.ok(!!~described.indexOf(name), `${name} method should be described in spec`)

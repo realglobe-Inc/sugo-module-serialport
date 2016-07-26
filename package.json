@@ -1,11 +1,12 @@
 {
   "name": "sugo-module-serialport",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "SUGOS module to access serial ports",
   "main": "lib",
+  "browser": "shim/browser.js",
   "scripts": {
-    "prepublish": "./ci/build.js",
-    "test": "./ci/test.js"
+    "test": "./ci/test.js",
+    "prepublish": "./ci/build.js && ./ci/browser.js"
   },
   "repository": "realglobe-Inc/sugo-module-serialport",
   "keywords": [
@@ -26,15 +27,17 @@
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "serialport": "^4.0.1",
-    "sg-check": "^1.0.3"
+    "sg-check": "^1.0.6",
+    "sugo-module-base": "^1.0.5"
   },
   "devDependencies": {
     "ape-tmpl": "^5.0.11",
     "coz": "^6.0.2",
     "injectmock": "^2.0.0",
     "sg-schemas": "^2.0.5",
+    "sg-templates": "^1.0.3",
     "sg-validator": "^1.0.1",
-    "sugo-ci-module": "^2.0.1",
+    "sugo-ci-module": "^2.0.5",
     "sugos-assets": "^2.0.1"
   },
   "engines": {

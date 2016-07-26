@@ -107,7 +107,8 @@ Register module to SUGO-Actor
 #!/usr/bin/env node
 
 /**
- * Example usage of the caller
+ * Example usage to register module on actor
+ * @see https://github.com/realglobe-Inc/sugo-actor
  */
 'use strict'
 
@@ -134,7 +135,8 @@ Then, call the module from remote caller.
 #!/usr/bin/env node
 
 /**
- * Example control from remote caller
+ * Example to call from caller
+ * @see https://github.com/realglobe-Inc/sugo-caller
  */
 'use strict'
 
@@ -152,22 +154,19 @@ co(function * () {
   // get list
   let list = yield sp.list()
   // get port path on Mac
-  let portPath = list.find(port => port.comName.startsWith('/dev/cu.usbserial')).comName
-
-  // open event
-  sp.on('open', () => co(function * () {
-    yield asleep(1000)
-    yield sp.write(Buffer.from('#M6'))
-    yield asleep(3000)
-    yield sp.write(Buffer.from('#M0'))
-    yield asleep(1000)
-    yield sp.close()
-  }))
+  let portPath = list.find((port) => port.comName.startsWith('/dev/cu.usbserial')).comName
 
   // open the port
-  yield sp.SerialPort(portPath, {
+  yield sp.connect(portPath, {
     baudRate: 57600
   })
+
+  yield asleep(1000)
+  yield sp.write(Buffer.from('#M6'))
+  yield asleep(3000)
+  yield sp.write(Buffer.from('#M0'))
+  yield asleep(1000)
+  yield sp.close()
 }).catch((err) => console.error(err))
 
 ```
@@ -186,7 +185,7 @@ The following methods are available from remote callers for the module.
 + [.ping(pong) -> string](#method-ping)
 + [.assert() -> boolean](#method-assert)
 + [.list() -> array](#method-list)
-+ [.SerialPort(path, options)](#method-serial-port)
++ [.connect(path, options)](#method-connect)
 + [.close()](#method-close)
 + [.drain()](#method-drain)
 + [.flush()](#method-flush)
@@ -217,10 +216,10 @@ Test if the actor fulfills system requirements
 
 Retrieves a list of available serial ports with metadata.
 
-<a name="method-serial-port"></a>
-### .SerialPort(path, options)
+<a name="method-connect"></a>
+### .connect(path, options)
 
-Create a new serial port object
+Create a new connection
 
 | Param | Type | Description |
 | ----- | ---- | ----------- |
@@ -298,11 +297,11 @@ The following events my be emitted from the module.
 
 | Param | Description |
 | ----- | ----------- |
-| "open"  | Callback is called with no arguments when the port is opened and ready for writing. |
-| "close"  | Callback is called with no arguments when the port is closed. |
-| "disconnect"  | Callback is called with an error object. This will always happen before a close event if a disconnection is detected. |
-| "data"  | Callback is called with data depending on your chosen parser. |
-| "error"  | Callback is called with an error object whenever there is an error. |
+| "open"  | the port is opened and ready for writing. |
+| "close"  | the port is closed. |
+| "disconnect"  | happen before a close event if a disconnection is detected. |
+| "data"  | there is an data. |
+| "error"  | there is an error. |
 
 
 <!-- Section from "doc/guides/04.Events.md.hbs" End -->
