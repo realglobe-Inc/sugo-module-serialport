@@ -36,6 +36,7 @@
     "injectmock": "^2.0.0",
     "sg-schemas": "^2.0.5",
     "sg-templates": "^1.0.3",
+    "sg-travis": "^1.1.25",
     "sg-validator": "^1.0.1",
     "sugo-ci-module": "^2.0.5",
     "sugos-assets": "^2.0.1"
